@@ -220,7 +220,7 @@
   </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
-    <option name="state" value="project://default" />
+    <option name="state" value="https://doms.svn.sourceforge.net/svnroot/doms/examples/tools/trunk/tools.ipr" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
@@ -249,7 +249,7 @@
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
+    <mapping directory="" vcs="svn" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
@@ -257,11 +257,21 @@
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/domsserver-0.0.11/jars/centralWebserviceInterface.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1/jars/commons-logging-1.1.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsclient-0.0.4/jars/domsclient.jar!/" />
         <root url="jar://$PROJECT_DIR$/lib/sbutil-0.5.2/jars/sbutil-0.5.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
+    </library>
+    <library name="domsclient">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/domsclient-0.0.4/jars/domsclient.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/lib/domsclient-0.0.4/apidocs/domsclient-0.0.4-doc.zip!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/domsclient-0.0.4/src/domsclient-src.zip!/" />
+      </SOURCES>
     </library>
   </component>
 </project>
