@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>dk.statsbiblioteket.doms</groupId>
+        <artifactId>doms</artifactId>
+        <version>0.1.1</version>
+    </parent>
+
+    <groupId>dk.statsbiblioteket.doms.tools</groupId>
+    <artifactId>tools</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Doms Tools package</name>
+
+    <packaging>pom</packaging>
+
+    <scm>
+        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/examples/tools/trunk</connection>
+        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/examples/tools/trunk
+        </developerConnection>
+        <url>http://doms.svn.sourceforge.net/viewvc/doms/examples/tools/trunk</url>
+    </scm>
+
+
+    <modules>
+        <module>modules/domscleaner</module>
+    </modules>
+
+    <dependencyManagement>
+
+        <dependencies>
+            <dependency>
+                <groupId>dk.statsbiblioteket.sbutil</groupId>
+                <artifactId>sbutil</artifactId>
+                <version>0.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>dk.statsbiblioteket.doms.client</groupId>
+                <artifactId>domsclient</artifactId>
+                <version>0.0.6</version>
+            </dependency>
+            <dependency>
+                <groupId>dk.statsbiblioteket.doms.central</groupId>
+                <artifactId>centralWebservice-interface</artifactId>
+                <version>0.0.18</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+</project>
