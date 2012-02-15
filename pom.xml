@@ -23,6 +23,7 @@
 
     <modules>
         <module>modules/domscleaner</module>
+        <module>modules/handleregistrar</module>
     </modules>
 
     <dependencyManagement>
@@ -34,14 +35,34 @@
                 <version>0.5.2</version>
             </dependency>
             <dependency>
-                <groupId>dk.statsbiblioteket.doms.client</groupId>
-                <artifactId>domsclient</artifactId>
-                <version>0.0.6</version>
+                <groupId>dk.statsbiblioteket.doms.ingestClient</groupId>
+                <artifactId>ingestClientImpl</artifactId>
+                <version>0.0.13</version>
+            </dependency>
+            <dependency>
+                <groupId>dk.statsbiblioteket.doms.domsutil</groupId>
+                <artifactId>domsutil-webservice-common</artifactId>
+                <version>0.0.20</version>
             </dependency>
             <dependency>
                 <groupId>dk.statsbiblioteket.doms.central</groupId>
                 <artifactId>centralWebservice-interface</artifactId>
                 <version>0.0.18</version>
+            </dependency>
+            <dependency>
+                <groupId>net.handle</groupId>
+                <artifactId>hdllib</artifactId>
+                <version>7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.2</version>
             </dependency>
         </dependencies>
 

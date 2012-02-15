@@ -1,12 +1,16 @@
 package dk.statsbiblioteket.doms.tools.cleaner;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.net.URL;
-
 import dk.statsbiblioteket.doms.client.DomsWSClient;
 import dk.statsbiblioteket.doms.client.DomsWSClientImpl;
 import dk.statsbiblioteket.util.qa.QAInfo;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Cleans up the mess when the ingester has failed, and put stuff in the
@@ -81,7 +85,8 @@ public class Domscleaner {
         DomsWSClient domswsclient = new DomsWSClientImpl();
         try {
             domswsclient.login(domsAPIWSLocation, username, password);
-            domswsclient.deleteObjects(pids);
+            domswsclient.deleteObjects("Deleted by tool Domscleaner",
+                                       pids.toArray(new String[pids.size()]));
         } catch(Exception e) {
             System.err.println(e);
         }
