@@ -9,6 +9,7 @@ import java.io.File;
  */
 public class HandleRegistrarTool {
     public static void main(String[] args) {
+        // TODO Reasonable argument reading, please.
         BasicHandleRegistrar registrar = new BasicHandleRegistrar(
                 new PropertyBasedRegistrarConfiguration(new File(args[2])));
         registrar.addHandles(args[0], args[1]);

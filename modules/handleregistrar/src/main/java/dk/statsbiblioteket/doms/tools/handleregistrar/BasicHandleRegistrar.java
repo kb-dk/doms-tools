@@ -3,19 +3,7 @@ package dk.statsbiblioteket.doms.tools.handleregistrar;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.UniformInterfaceException;
-import net.handle.hdllib.AbstractMessage;
-import net.handle.hdllib.AbstractResponse;
-import net.handle.hdllib.AddValueRequest;
-import net.handle.hdllib.AdminRecord;
-import net.handle.hdllib.Common;
-import net.handle.hdllib.CreateHandleRequest;
-import net.handle.hdllib.Encoder;
-import net.handle.hdllib.HandleException;
-import net.handle.hdllib.HandleResolver;
-import net.handle.hdllib.HandleValue;
-import net.handle.hdllib.ModifyValueRequest;
-import net.handle.hdllib.PublicKeyAuthenticationInfo;
-import net.handle.hdllib.ValueReference;
+import net.handle.hdllib.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -34,7 +22,11 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +40,18 @@ public class BasicHandleRegistrar implements HandleRegistrar {
     private static final String DC_DATASTREAM_ID = "DC";
 
     /** The admin ID */
-    private static final String ADMIN_ID = "";   // Should this be empty?!?
+    private static final String ADMIN_ID = "0.NA/109.3.1";   // TODO rite?
+
+    /** Password/passphrase for getting handle private key */
+    private static final String HANDLE_PASSWORD = ""; // TODO set password
+
+    /** Path to admpriv.bin file */
+    private static final String PRIVATE_KEY_PATH
+            = System.getProperty("user.home")
+            + System.getProperty("path.separator")
+            + ".config"
+            + System.getProperty("path.separator")
+            + "handle";
 
     /** Charset used by the Handle system. */
     private static final Charset DEFAULT_ENCODING = Charset.forName("UTF8");
@@ -78,7 +81,7 @@ public class BasicHandleRegistrar implements HandleRegistrar {
     private static final Boolean PUBLIC_WRITE = false;
 
     /** Init a public key authentication information object. */
-    private static PublicKeyAuthenticationInfo PUB_KEY_AUTH_INFO = null;
+    private static PublicKeyAuthenticationInfo pubKeyAuthInfo = null;
 
     private final RegistrarConfiguration config;
     private final Log log = LogFactory.getLog(getClass());
@@ -98,6 +101,49 @@ public class BasicHandleRegistrar implements HandleRegistrar {
 
     public BasicHandleRegistrar(RegistrarConfiguration config) {
         this.config = config;
+
+        PrivateKey privateKey = loadPrivateKey();
+
+        /**
+         * AuthenticationInfo is constructed with the admin handle, index,
+         * and PrivateKey as arguments.
+         */
+        pubKeyAuthInfo = new PublicKeyAuthenticationInfo(
+                ADMIN_ID.getBytes(DEFAULT_ENCODING), ADMIN_INDEX, privateKey);
+    }
+
+    /**
+     * Load the private key from file.
+     *
+     * @return The private key loaded from file.
+     * @throws PrivateKeyException If something went wrong loading the private
+     * key.
+     */
+    private PrivateKey loadPrivateKey()
+        throws PrivateKeyException {
+        File privateKeyFile;
+        privateKeyFile = new File(PRIVATE_KEY_PATH);
+        PrivateKey key;
+
+        if (!privateKeyFile.exists()) {
+            throw new PrivateKeyException("The admin private key file could "
+                    + "not be found.");
+        }
+
+        if (!privateKeyFile.canRead()) {
+            throw new PrivateKeyException("The admin private key file cannot "
+                    + "be read.");
+        }
+
+        try {
+            key = Util.getPrivateKeyFromFileWithPassphrase(privateKeyFile,
+                    HANDLE_PASSWORD);
+        } catch (Exception e) {
+            String message = "The admin private key could not be used, "
+                + " was the correct password used?" +  e.getMessage();
+            throw new PrivateKeyException(message, e);
+        }
+        return key;
     }
 
     public void addHandles(String query, String urlPattern) {
@@ -208,7 +254,7 @@ public class BasicHandleRegistrar implements HandleRegistrar {
         // Create the request to send and the resolver to send it
         AddValueRequest request =
                 new AddValueRequest(handle.getBytes(DEFAULT_ENCODING),
-                        newValue, PUB_KEY_AUTH_INFO);
+                        newValue, pubKeyAuthInfo);
         HandleResolver resolver = new HandleResolver();
         AbstractResponse response;
 
@@ -259,7 +305,7 @@ public class BasicHandleRegistrar implements HandleRegistrar {
         // Create the request to send and the resolver to send it
         ModifyValueRequest request =
                 new ModifyValueRequest(handle.getBytes(DEFAULT_ENCODING),
-                        replacementValue, PUB_KEY_AUTH_INFO);
+                        replacementValue, pubKeyAuthInfo);
         HandleResolver resolver = new HandleResolver();
         AbstractResponse response;
 
@@ -328,7 +374,7 @@ public class BasicHandleRegistrar implements HandleRegistrar {
         // Create the request to send and the resolver to send it
         CreateHandleRequest request =
                 new CreateHandleRequest(handle.getBytes(DEFAULT_ENCODING),
-                        values, PUB_KEY_AUTH_INFO);
+                        values, pubKeyAuthInfo);
         HandleResolver resolver = new HandleResolver();
         AbstractResponse response;
 
