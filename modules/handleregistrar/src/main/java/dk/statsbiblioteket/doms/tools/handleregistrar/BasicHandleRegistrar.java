@@ -28,7 +28,7 @@ public class BasicHandleRegistrar implements HandleRegistrar {
         for (String pid : pids) {
             try {
                 log.debug("Adding handle to '" + pid + "'");
-                String handle = repositoryHandler.addHandleToObject(pid, this);
+                String handle = repositoryHandler.addHandleToObject(pid);
                 log.debug("registering handle '" + handle + "'");
                 pidResolverHandler.registerPid(pid, handle, urlPattern);
                 log.info("Added handle '" + handle + "' for pid '" + "'" + pid

@@ -9,6 +9,5 @@ public interface RepositoryHandler {
     public List<String> findObjectFromQuery(String query)
             throws BackendInvalidCredsException, BackendMethodFailedException;
 
-    public String addHandleToObject(String pid,
-                             BasicHandleRegistrar basicHandleRegistrar);
+    public String addHandleToObject(String pid);
 }

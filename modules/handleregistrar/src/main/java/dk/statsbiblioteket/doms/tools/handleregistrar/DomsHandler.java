@@ -27,7 +27,7 @@ public class DomsHandler implements RepositoryHandler {
     private static final Client REST_CLIENT = Client.create();
 
     private static final String HANDLE_URI_NAMESPACE = "hdl:";
-    private static final String HANDLE_PREFIX = "109.3.1/"; //TODO: Config
+    private static final String HANDLE_PREFIX = "109.1.3/"; //TODO: Config
 
     private static final String DC_DATASTREAM_ID = "DC";
     private static final String DC_IDENTIFIER_ELEMENT = "identifier";
@@ -85,8 +85,7 @@ public class DomsHandler implements RepositoryHandler {
     }
 
     @Override
-    public String addHandleToObject(String pid,
-                                    BasicHandleRegistrar basicHandleRegistrar) {
+    public String addHandleToObject(String pid) {
         DomsWSClient domsClient = new DomsWSClientImpl();
         domsClient.setCredentials(config.getDomsWSAPIEndpoint(),
                                   config.getUsername(), config.getPassword());
