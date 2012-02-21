@@ -23,7 +23,7 @@ public class BasicHandleRegistrarTest extends TestCase {
         assertEquals(1, repositoryHandler.findObjectFromQueryCount);
         assertEquals("info:fedora/foo", repositoryHandler.addHandleToObjectPid);
         assertEquals(1, pidResolverHandler.registerPidCount);
-        assertEquals("hdl:109.1.3/foo", pidResolverHandler.registerPidPid);
+        assertEquals("hdl:109.3.1/foo", pidResolverHandler.registerPidPid);
         assertEquals("info:fedora/foo", pidResolverHandler.registerPidRepositoryId);
         assertEquals("bar", pidResolverHandler.registerPidUrlPattern);
     }

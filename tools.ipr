@@ -356,48 +356,48 @@
         <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.central:centralWebservice-interface:0.0.18">
+    <library name="Maven: dk.statsbiblioteket.doms.central:centralWebservice-interface:0.0.26">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/central/centralWebservice-interface/0.0.18/centralWebservice-interface-0.0.18.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/central/centralWebservice-interface/0.0.26/centralWebservice-interface-0.0.26.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/central/centralWebservice-interface/0.0.18/centralWebservice-interface-0.0.18-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/central/centralWebservice-interface/0.0.26/centralWebservice-interface-0.0.26-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/central/centralWebservice-interface/0.0.18/centralWebservice-interface-0.0.18-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/central/centralWebservice-interface/0.0.26/centralWebservice-interface-0.0.26-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-impl:0.0.13">
+    <library name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-impl:0.0.14-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-impl/0.0.13/domsClient-common-impl-0.0.13.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-impl/0.0.14-SNAPSHOT/domsClient-common-impl-0.0.14-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-impl/0.0.13/domsClient-common-impl-0.0.13-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-impl/0.0.14-SNAPSHOT/domsClient-common-impl-0.0.14-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-impl/0.0.13/domsClient-common-impl-0.0.13-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-impl/0.0.14-SNAPSHOT/domsClient-common-impl-0.0.14-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-interface:0.0.13">
+    <library name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-interface:0.0.14-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-interface/0.0.13/domsClient-common-interface-0.0.13.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-interface/0.0.14-SNAPSHOT/domsClient-common-interface-0.0.14-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-interface/0.0.13/domsClient-common-interface-0.0.13-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-interface/0.0.14-SNAPSHOT/domsClient-common-interface-0.0.14-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-interface/0.0.13/domsClient-common-interface-0.0.13-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient-common-interface/0.0.14-SNAPSHOT/domsClient-common-interface-0.0.14-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.client:domsClient:0.0.13">
+    <library name="Maven: dk.statsbiblioteket.doms.client:domsClient:0.0.14-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient/0.0.13/domsClient-0.0.13.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient/0.0.14-SNAPSHOT/domsClient-0.0.14-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient/0.0.13/domsClient-0.0.13-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient/0.0.14-SNAPSHOT/domsClient-0.0.14-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient/0.0.13/domsClient-0.0.13-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/client/domsClient/0.0.14-SNAPSHOT/domsClient-0.0.14-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-webservice-common:0.0.20">
@@ -411,26 +411,26 @@
         <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-webservice-common/0.0.20/domsutil-webservice-common-0.0.20-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClient:0.0.13">
+    <library name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClient:0.0.14-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClient/0.0.13/ingestClient-0.0.13.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClient/0.0.14-SNAPSHOT/ingestClient-0.0.14-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClient/0.0.13/ingestClient-0.0.13-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClient/0.0.14-SNAPSHOT/ingestClient-0.0.14-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClient/0.0.13/ingestClient-0.0.13-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClient/0.0.14-SNAPSHOT/ingestClient-0.0.14-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClientImpl:0.0.13">
+    <library name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClientImpl:0.0.14-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClientImpl/0.0.13/ingestClientImpl-0.0.13.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClientImpl/0.0.14-SNAPSHOT/ingestClientImpl-0.0.14-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClientImpl/0.0.13/ingestClientImpl-0.0.13-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClientImpl/0.0.14-SNAPSHOT/ingestClientImpl-0.0.14-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClientImpl/0.0.13/ingestClientImpl-0.0.13-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ingestClient/ingestClientImpl/0.0.14-SNAPSHOT/ingestClientImpl-0.0.14-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: dk.statsbiblioteket.sbutil:sbutil:0.5.2">

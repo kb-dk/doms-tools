@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A mockup implementation, which on any search will return a list containing
  * the only the pid "info:fedora/foo", and on any call to update with that pid
- * will succeed and return the handle hdl:109.1.3/foo, and fail on any other
+ * will succeed and return the handle hdl:109.3.1/foo, and fail on any other
  * pid.
  *
  * Calls will be counted and last parameters tracked in public field variables.
@@ -32,6 +32,6 @@ public class MockupRepositoryHandler implements RepositoryHandler {
         if (!pid.equals("info:fedora/foo")) {
             throw new BackendMethodFailedException("Mockup fail");
         }
-        return "hdl:109.1.3/foo";
+        return "hdl:109.3.1/foo";
     }
 }

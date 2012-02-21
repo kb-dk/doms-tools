@@ -14,7 +14,6 @@ import dk.statsbiblioteket.doms.webservices.authentication.Base64;
 import dk.statsbiblioteket.util.xml.DefaultNamespaceContext;
 
 import javax.xml.namespace.NamespaceContext;
-import javax.xml.transform.dom.DOMSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -27,7 +26,7 @@ public class DomsHandler implements RepositoryHandler {
     private static final Client REST_CLIENT = Client.create();
 
     private static final String HANDLE_URI_NAMESPACE = "hdl:";
-    private static final String HANDLE_PREFIX = "109.1.3/"; //TODO: Config
+    private static final String HANDLE_PREFIX = "109.3.1/"; //TODO: Config
 
     private static final String DC_DATASTREAM_ID = "DC";
     private static final String DC_IDENTIFIER_ELEMENT = "identifier";
@@ -38,8 +37,8 @@ public class DomsHandler implements RepositoryHandler {
             = new DefaultNamespaceContext();
     static {
         ((DefaultNamespaceContext) dsNamespaceContext)
-                .setNameSpace(DC_PREFIX,
-                              DC_NAMESPACE_URI);
+                .setNameSpace(DC_NAMESPACE_URI,
+                              DC_PREFIX);
     }
 
     private final RegistrarConfiguration config;
@@ -111,7 +110,7 @@ public class DomsHandler implements RepositoryHandler {
         try {
             result = (NodeList) xPath
                     .evaluate("//" + DC_PREFIX + ":" + DC_IDENTIFIER_ELEMENT,
-                              new DOMSource(dataStream),
+                              dataStream,
                               XPathConstants.NODESET);
         } catch (XPathExpressionException e) {
             throw new InconsistentDataException(
