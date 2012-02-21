@@ -24,13 +24,15 @@ import java.security.PrivateKey;
  */
 public class HandleHandler implements PidResolverHandler {
     /** The admin ID */
-    private static final String ADMIN_ID = "0.NA/109.3.1";   // TODO rite?
+    private static final String ADMIN_ID = "0.NA/109.3.1";
     /** Password/passphrase for getting handle private key */
-    private static final String HANDLE_PASSWORD = ""; // TODO set password
+    private static final String HANDLE_PASSWORD = "";
     /** Path to admpriv.bin file */
     private static final String PRIVATE_KEY_PATH = System.getProperty("user.home")
-            + System.getProperty("path.separator") + ".config"
-            + System.getProperty("path.separator") + "handle";
+            + System.getProperty("file.separator") + ".config"
+            + System.getProperty("file.separator") + "handle";
+    /** Name of the admpriv.bin file */
+    private static final String PRIVATE_KEY_FILENAME = "admpriv.bin";
     /** Charset used by the Handle system. */
     private static final Charset DEFAULT_ENCODING = Charset.forName("UTF8");
     /** Admin index aka Handle index, default value 300 */
@@ -81,25 +83,28 @@ public class HandleHandler implements PidResolverHandler {
      */
     private static PrivateKey loadPrivateKey() throws PrivateKeyException {
         File privateKeyFile;
-        privateKeyFile = new File(PRIVATE_KEY_PATH);
+        privateKeyFile = new File(PRIVATE_KEY_PATH, PRIVATE_KEY_FILENAME);
         PrivateKey key;
 
         if (!privateKeyFile.exists()) {
             throw new PrivateKeyException(
-                    "The admin private key file could not be found.");
+                    "The admin private key file could not be found in '"
+                            + privateKeyFile + "'.");
         }
 
         if (!privateKeyFile.canRead()) {
             throw new PrivateKeyException(
-                    "The admin private key file cannot be read.");
+                    "The admin private key file cannot be read in '"
+                            + privateKeyFile + "'.");
         }
 
         try {
             key = Util.getPrivateKeyFromFileWithPassphrase(privateKeyFile,
                                                            HANDLE_PASSWORD);
         } catch (Exception e) {
-            String message = "The admin private key could not be used, "
-                    + " was the correct password used?" + e.getMessage();
+            String message = "The admin private key  in '"
+                            + privateKeyFile + "' could not be used, "
+                    + " was the correct password used? " + e.getMessage();
             throw new PrivateKeyException(message, e);
         }
         return key;
@@ -142,6 +147,7 @@ public class HandleHandler implements PidResolverHandler {
                         // It was a different url, replace it
                         replaceUrlOfPidAtServer(pid, indexAtServer,
                                                 urlToRegister);
+                        return; //TODO: Discuss logic of replacing URLs
                     }
                 }
             }
@@ -193,7 +199,8 @@ public class HandleHandler implements PidResolverHandler {
             // Resolution successful, hooray
         } else {
             throw new RegisteringPidFailedException(
-                    "Failed trying to " + "add URL to handle at the server.");
+                    "Failed trying to add URL to handle at the server, "
+                            + "response was " + response);
         }
     }
 
@@ -238,7 +245,7 @@ public class HandleHandler implements PidResolverHandler {
             // Resolution successful, hooray
         } else {
             throw new RegisteringPidFailedException(
-                    "Failed trying to replace URL of handle at the server.");
+                    "Failed trying to replace URL of handle at the server, response was " + response);
         }
     }
 
@@ -302,7 +309,7 @@ public class HandleHandler implements PidResolverHandler {
             // Resolution successful, hooray
         } else {
             throw new RegisteringPidFailedException(
-                    "Failed trying to create a new handle at the server.");
+                    "Failed trying to create a new handle at the server, response was" + response);
         }
     }
 }

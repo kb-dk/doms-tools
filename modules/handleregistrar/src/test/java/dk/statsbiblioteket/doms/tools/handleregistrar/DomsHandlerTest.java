@@ -21,7 +21,7 @@ import java.util.List;
  * resources is available and contains the expected data.
  *
  * Expected data is:
- * Object with UUID uuid:00022366-955b-4cb5-9646-e04c9262bd6f exists and has handle hdl:109.3.1/uuid:00022366-955b-4cb5-9646-e04c9262bd6f
+ * Object with UUID uuid:00022366-955b-4cb5-9646-e04c9262bd6f exists and has handle 109.3.1/uuid:00022366-955b-4cb5-9646-e04c9262bd6f
  * Object with UUID uuid:0041e7a1-79e3-4314-8af0-f59d71fd90f2 exists and has no handles
  */
 public class DomsHandlerTest extends TestCase {
@@ -83,7 +83,7 @@ public class DomsHandlerTest extends TestCase {
         // Call method on object with existing handle
         String handle1 = domsHandler.addHandleToObject(PID1);
         // Check correct handle generated
-        assertEquals("hdl:109.3.1/" + PID1, handle1);
+        assertEquals("109.3.1/" + PID1, handle1);
         // Read new DC datastream from Doms
         Document d1New = domsClient.getDataStream(PID1, "DC");
         // Find identifiers from old and new DC datastream
@@ -107,7 +107,7 @@ public class DomsHandlerTest extends TestCase {
         // Call method on object without existing handle
         String handle2 = domsHandler.addHandleToObject(PID2);
         // Check correct handle generated
-        assertEquals("hdl:109.3.1/" + PID2, handle2);
+        assertEquals("109.3.1/" + PID2, handle2);
         // Read new DC datastream from Doms
         Document d2New = domsClient.getDataStream(PID2, "DC");
         // Find identifiers from old and new DC datastream
@@ -124,12 +124,12 @@ public class DomsHandlerTest extends TestCase {
         boolean found = false;
         // Wasn't there before
         for (int i = 0; i < result2before.getLength(); i++) {
-            found |= result2before.item(i).getTextContent().equals(handle2);
+            found |= result2before.item(i).getTextContent().equals("hdl:" + handle2);
         }
         assertFalse(found);
         // Is there now
         for (int i = 0; i < result2after.getLength(); i++) {
-            found |= result2after.item(i).getTextContent().equals(handle2);
+            found |= result2after.item(i).getTextContent().equals("hdl:" + handle2);
         }
         assertTrue(found);
     }

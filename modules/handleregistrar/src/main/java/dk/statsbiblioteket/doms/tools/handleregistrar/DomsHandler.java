@@ -90,7 +90,7 @@ public class DomsHandler implements RepositoryHandler {
                                   config.getUsername(), config.getPassword());
 
         // Generate handle from UUID
-        String handle = HANDLE_URI_NAMESPACE + HANDLE_PREFIX + dk
+        String handle = HANDLE_PREFIX + dk
                 .statsbiblioteket.doms.client.utils.Constants.ensurePID(pid);
         //Read DC datastream
         Document dataStream;
@@ -126,7 +126,7 @@ public class DomsHandler implements RepositoryHandler {
         int i = 0;
         do {
             if ((item = result.item(i++)).getTextContent().trim()
-                    .equals(handle)) {
+                    .equals(HANDLE_URI_NAMESPACE + handle)) {
                 found = true;
             }
         } while (!found && i < result.getLength());
@@ -135,7 +135,7 @@ public class DomsHandler implements RepositoryHandler {
             //Add it to DC XML
             Node newItem = dataStream
                     .createElementNS(DC_NAMESPACE_URI, DC_IDENTIFIER_ELEMENT);
-            newItem.setTextContent(handle);
+            newItem.setTextContent(HANDLE_URI_NAMESPACE + handle);
             item.getParentNode().insertBefore(newItem, item.getNextSibling());
             try {
                 //Unpublish
