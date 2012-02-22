@@ -7,6 +7,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 
@@ -16,6 +18,8 @@ import java.io.File;
  * as handles resolving to the URL pattern.
  */
 public class HandleRegistrarTool {
+    private static Log log = LogFactory.getLog(HandleRegistrarTool.class);
+
     public static void main(String[] args) {
         CommandLine line = parseOptions(args);
         if (line == null) {
@@ -33,6 +37,9 @@ public class HandleRegistrarTool {
                     .replaceAll("/", System.getProperty("file.separator"));
         }
 
+        log.info("Config file: " + configFile);
+        log.info("Query: " + query);
+        log.info("URL pattern: " + urlPattern);
         RegistrarConfiguration config = new PropertyBasedRegistrarConfiguration(
                 new File(configFile));
         HandleRegistrar registrar = new BasicHandleRegistrar(config,
@@ -73,7 +80,7 @@ public class HandleRegistrarTool {
         try {
             line = parser.parse(options, args);
             if (line.hasOption("h")) {
-                new HelpFormatter().printHelp("HandleRegistrarTool", options);
+                new HelpFormatter().printHelp("handleregistrartool.sh", options);
                 return null;
             }
 
