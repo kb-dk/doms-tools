@@ -1,5 +1,13 @@
 package dk.statsbiblioteket.doms.tools.handleregistrar;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
+
 import java.io.File;
 
 /**
@@ -9,12 +17,77 @@ import java.io.File;
  */
 public class HandleRegistrarTool {
     public static void main(String[] args) {
-        // TODO Reasonable argument reading, please.
-        RegistrarConfiguration config
-                = new PropertyBasedRegistrarConfiguration(new File(args[2]));
+        CommandLine line = parseOptions(args);
+        if (line == null) {
+            System.exit(1);
+        }
+
+        String query = line.getOptionValue("q");
+        String urlPattern = line.getOptionValue("u");
+        String configFile;
+        if (line.hasOption("c")) {
+            configFile = line.getOptionValue("c");
+        } else {
+            configFile = System.getProperty("user.home")
+                    + "/.config/handle/handleregistrar.properties"
+                    .replaceAll("/", System.getProperty("file.separator"));
+        }
+
+        RegistrarConfiguration config = new PropertyBasedRegistrarConfiguration(
+                new File(configFile));
         HandleRegistrar registrar = new BasicHandleRegistrar(config,
-                new DomsHandler(config),
-                new HandleHandler(config));
-        registrar.addHandles(args[0], args[1]);
+                                                             new DomsHandler(
+                                                                     config),
+                                                             new HandleHandler(
+                                                                     config));
+        registrar.addHandles(query, urlPattern);
+    }
+
+    /**
+     * Parse arguments. --help will print usage, so will any wrong supplied
+     * arguments.
+     *
+     * @param args Arguments given on command lines.
+     * @return Parsed command line. Returns null on errors, in which case a help
+     *         message has been printed. Calling method is encouraged to exit.
+     */
+    public static CommandLine parseOptions(String[] args) {
+        CommandLine line;
+        Option help = new Option("h", "help", false, "Print this message");
+        Option configFileOption = new Option("c", "config-file", true,
+                                             "Configuration file. Default is $HOME/.config/handle/handleregistrar.properties");
+        Option queryOption = new Option("q", "query", true,
+                                        "iTQL query for getting PIDs from DOMS. Must return a list of PIDs.");
+        queryOption.setRequired(true);
+        Option urlPatternOption = new Option("u", "url-pattern", true,
+                                             "URL pattern for what the objects should resolve as. %s is replaced with PID.");
+        urlPatternOption.setRequired(true);
+
+        Options options = new Options();
+        options.addOption(help);
+        options.addOption(configFileOption);
+        options.addOption(queryOption);
+        options.addOption(urlPatternOption);
+
+        CommandLineParser parser = new PosixParser();
+        try {
+            line = parser.parse(options, args);
+            if (line.hasOption("h")) {
+                new HelpFormatter().printHelp("HandleRegistrarTool", options);
+                return null;
+            }
+
+            if (!line.hasOption("q") || !line.hasOption("u")) {
+                System.err.println("Missing required arguments");
+                new HelpFormatter().printHelp("HandleRegistrarTool", options);
+                return null;
+            }
+        } catch (ParseException e) {
+            System.out.println("Unable to parse command line arguments: " + e
+                    .getMessage());
+            new HelpFormatter().printHelp("HandleRegistrarTool", options);
+            return null;
+        }
+        return line;
     }
 }
