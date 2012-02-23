@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Test handle objects using online Fedora.
  * NOTE: This test will _only_ work if the fedora mentioned in the test
- * resources is available and contains the expected data.
+ * config is available and contains the expected data.
  *
  * Expected data is:
  * Object with UUID uuid:00022366-955b-4cb5-9646-e04c9262bd6f exists and has handle 109.3.1/uuid:00022366-955b-4cb5-9646-e04c9262bd6f
@@ -45,7 +45,7 @@ public class DomsHandlerTest extends TestCase {
 
     public void setUp() throws Exception {
         config = new PropertyBasedRegistrarConfiguration(
-                new File("src/test/resources/handleregistrar.properties"));
+                new File("src/test/config/handleregistrar.properties"));
         domsClient = new DomsWSClientImpl();
         domsClient.setCredentials(config.getDomsWSAPIEndpoint(),
                                   config.getUsername(), config.getPassword());

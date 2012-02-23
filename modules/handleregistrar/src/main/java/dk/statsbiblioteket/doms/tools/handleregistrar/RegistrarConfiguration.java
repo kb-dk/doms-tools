@@ -13,4 +13,10 @@ public interface RegistrarConfiguration {
     String getPassword();
 
     URL getDomsWSAPIEndpoint();
+
+    String getHandlePrefix();
+
+    String getPrivateKeyPath();
+
+    String getPrivateKeyPassword();
 }

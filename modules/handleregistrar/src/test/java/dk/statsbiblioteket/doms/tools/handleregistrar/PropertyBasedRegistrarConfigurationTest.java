@@ -12,7 +12,7 @@ import java.net.URL;
 public class PropertyBasedRegistrarConfigurationTest extends TestCase {
     private RegistrarConfiguration config
             = new PropertyBasedRegistrarConfiguration(
-            new File("src/test/resources/handleregistrar.properties"));
+            new File("src/test/config/handleregistrar.properties"));
 
     public void testGetFedoraLocation() {
         assertEquals("http://alhena:7880/fedora", config.getFedoraLocation());
@@ -32,4 +32,15 @@ public class PropertyBasedRegistrarConfigurationTest extends TestCase {
                 config.getDomsWSAPIEndpoint());
     }
 
+    public void testGetHandlePrefix() {
+        assertEquals("109.3.1", config.getHandlePrefix());
+    }
+
+    public void testGetPrivateKeyPath() {
+        assertNull(config.getPrivateKeyPath());
+    }
+
+    public void testGetPrivateKeyPassword() {
+        assertEquals("", config.getPrivateKeyPassword());
+    }
 }

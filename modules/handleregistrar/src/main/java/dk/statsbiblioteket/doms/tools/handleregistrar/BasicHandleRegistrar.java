@@ -10,20 +10,17 @@ import java.util.List;
 public class BasicHandleRegistrar implements HandleRegistrar {
     private final RepositoryHandler repositoryHandler;
     private final PidResolverHandler pidResolverHandler;
-    private final RegistrarConfiguration config;
     private final Log log = LogFactory.getLog(getClass());
     private int success = 0;
     private int failure = 0;
 
-    public BasicHandleRegistrar(RegistrarConfiguration config,
-                                RepositoryHandler repositoryHandler,
+    public BasicHandleRegistrar(RepositoryHandler repositoryHandler,
                                 PidResolverHandler pidResolverHandler) {
-        this.config = config;
         this.repositoryHandler = repositoryHandler;
         this.pidResolverHandler = pidResolverHandler;
     }
 
-    public void addHandles(String query, String urlPattern) {
+    public String addHandles(String query, String urlPattern) {
         List<String> pids = repositoryHandler.findObjectFromQuery(query);
         for (String pid : pids) {
             try {
@@ -31,7 +28,7 @@ public class BasicHandleRegistrar implements HandleRegistrar {
                 String handle = repositoryHandler.addHandleToObject(pid);
                 log.debug("registering handle '" + handle + "'");
                 pidResolverHandler.registerPid(pid, handle, urlPattern);
-                log.info("Added handle '" + handle + "' for pid '" + "'" + pid
+                log.info("Added handle '" + handle + "' for pid '" + pid
                                  + "' using url pattern '" + urlPattern + "'");
                 success++;
             } catch (Exception e) {
@@ -39,7 +36,9 @@ public class BasicHandleRegistrar implements HandleRegistrar {
                 log.error("Error handling pid'" + pid + "'", e);
             }
         }
-        log.info("Done adding handles. #success: " + success + " #failure: "
-                         + failure);
+        String message = "Done adding handles. #success: " + success
+                + " #failure: " + failure;
+        log.info(message);
+        return message;
     }
 }

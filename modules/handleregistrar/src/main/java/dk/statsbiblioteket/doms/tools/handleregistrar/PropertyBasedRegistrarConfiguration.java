@@ -21,6 +21,9 @@ public class PropertyBasedRegistrarConfiguration
     public static final String USER_NAME_KEY = "dk.statsbiblioteket.doms.tools.handleregistrar.userName";
     public static final String PASSWORD_KEY = "dk.statsbiblioteket.doms.tools.handleregistrar.password";
     public static final String DOMS_WS_API_ENDPOINT_KEY = "dk.statsbiblioteket.doms.tools.handleregistrar.domsWSAPIEndpoint";
+    public static final String HANDLE_PREFIX_KEY = "dk.statsbiblioteket.doms.tools.handleregistrar.handlePrefix";
+    public static final String PRIVATE_KEY_PATH = "dk.statsbiblioteket.doms.tools.handleregistrar.privateKeyPath";
+    public static final String PRIVATE_KEY_PASSWORD = "dk.statsbiblioteket.doms.tools.handleregistrar.privateKeyPassword";
 
     public PropertyBasedRegistrarConfiguration(File propertiesFile) {
         this.properties = new Properties();
@@ -54,5 +57,20 @@ public class PropertyBasedRegistrarConfiguration
         } catch (MalformedURLException e) {
             throw new InitializationFailedException("Invalid property for '" + DOMS_WS_API_ENDPOINT_KEY + "'", e);
         }
+    }
+
+    @Override
+    public String getHandlePrefix() {
+        return properties.getProperty(HANDLE_PREFIX_KEY);
+    }
+
+    @Override
+    public String getPrivateKeyPath() {
+        return properties.getProperty(PRIVATE_KEY_PATH);
+    }
+
+    @Override
+    public String getPrivateKeyPassword() {
+        return properties.getProperty(PRIVATE_KEY_PASSWORD);
     }
 }

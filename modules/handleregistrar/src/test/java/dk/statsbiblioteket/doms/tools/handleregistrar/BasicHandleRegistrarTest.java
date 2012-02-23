@@ -2,8 +2,6 @@ package dk.statsbiblioteket.doms.tools.handleregistrar;
 
 import junit.framework.TestCase;
 
-import java.io.File;
-
 /**
  * Test BasicHandleRegistrar calls the expected methods the expected number of
  * times.
@@ -14,9 +12,7 @@ public class BasicHandleRegistrarTest extends TestCase {
                 = new MockupRepositoryHandler();
         MockupPidResolverHandler pidResolverHandler
                 = new MockupPidResolverHandler();
-        new BasicHandleRegistrar(new PropertyBasedRegistrarConfiguration(
-                new File("src/test/resources/handleregistrar.properties")),
-                                 repositoryHandler, pidResolverHandler)
+        String result = new BasicHandleRegistrar(repositoryHandler, pidResolverHandler)
                 .addHandles("foo", "bar");
         assertEquals(1, repositoryHandler.findObjectFromQueryCount);
         assertEquals("foo", repositoryHandler.findObjectFromQueryQuery);
@@ -26,5 +22,6 @@ public class BasicHandleRegistrarTest extends TestCase {
         assertEquals("109.3.1/foo", pidResolverHandler.registerPidPid);
         assertEquals("info:fedora/foo", pidResolverHandler.registerPidRepositoryId);
         assertEquals("bar", pidResolverHandler.registerPidUrlPattern);
+        assertEquals("Done adding handles. #success: 1 #failure: 0", result);
     }
 }

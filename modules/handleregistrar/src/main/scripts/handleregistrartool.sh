@@ -1,3 +1,2 @@
 #!/bin/sh
-# TODO logging configuration
-java -classpath lib/\* dk.statsbiblioteket.doms.tools.handleregistrar.HandleRegistrarTool "$@"
+java -Dlog4j.configuration=file://$(readlink -f $(dirname $0))/../config/log4j.xml -classpath lib/\* dk.statsbiblioteket.doms.tools.handleregistrar.HandleRegistrarTool "$@"

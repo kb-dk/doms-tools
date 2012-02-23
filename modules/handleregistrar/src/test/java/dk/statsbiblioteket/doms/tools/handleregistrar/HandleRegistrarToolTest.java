@@ -42,10 +42,10 @@ public class HandleRegistrarToolTest extends TestCase {
         assertEquals("query", cl.getOptionValue("q"));
         assertEquals("urlpattern", cl.getOptionValue("u"));
         assertEquals("configfile", cl.getOptionValue("c"));
-        cl = HandleRegistrarTool.parseOptions(new String[]{"-c", "resources/handleregistrar.properties", "-q", "select $object from <#ri> where $object <dc:identifier> 'uuid:00022366-955b-4cb5-9646-e04c9262bd6f'", "-u", "http://devel05.statsbiblioteket.dk:9381/kultur/#/?recordId=doms_radioTVCollection:%s"});
+        cl = HandleRegistrarTool.parseOptions(new String[]{"-c", "config/handleregistrar.properties", "-q", "select $object from <#ri> where $object <dc:identifier> 'uuid:00022366-955b-4cb5-9646-e04c9262bd6f'", "-u", "http://devel05.statsbiblioteket.dk:9381/kultur/#/?recordId=doms_radioTVCollection:%s"});
         assertNotNull(cl);
         assertEquals("select $object from <#ri> where $object <dc:identifier> 'uuid:00022366-955b-4cb5-9646-e04c9262bd6f'", cl.getOptionValue("q"));
         assertEquals("http://devel05.statsbiblioteket.dk:9381/kultur/#/?recordId=doms_radioTVCollection:%s", cl.getOptionValue("u"));
-        assertEquals("resources/handleregistrar.properties", cl.getOptionValue("c"));
+        assertEquals("config/handleregistrar.properties", cl.getOptionValue("c"));
     }
 }

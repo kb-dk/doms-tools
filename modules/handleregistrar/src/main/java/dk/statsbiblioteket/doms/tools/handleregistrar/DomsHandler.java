@@ -26,8 +26,6 @@ public class DomsHandler implements RepositoryHandler {
     private static final Client REST_CLIENT = Client.create();
 
     private static final String HANDLE_URI_NAMESPACE = "hdl:";
-    private static final String HANDLE_PREFIX = "109.3.1/"; //TODO: Config
-
     private static final String DC_DATASTREAM_ID = "DC";
     private static final String DC_IDENTIFIER_ELEMENT = "identifier";
     private static final String DC_PREFIX = "dc";
@@ -90,8 +88,8 @@ public class DomsHandler implements RepositoryHandler {
                                   config.getUsername(), config.getPassword());
 
         // Generate handle from UUID
-        String handle = HANDLE_PREFIX + dk
-                .statsbiblioteket.doms.client.utils.Constants.ensurePID(pid);
+        String handle = config.getHandlePrefix() + "/" + dk.statsbiblioteket
+                .doms.client.utils.Constants.ensurePID(pid);
         //Read DC datastream
         Document dataStream;
         try {

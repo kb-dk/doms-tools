@@ -14,6 +14,8 @@ import net.handle.hdllib.ModifyValueRequest;
 import net.handle.hdllib.PublicKeyAuthenticationInfo;
 import net.handle.hdllib.Util;
 import net.handle.hdllib.ValueReference;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -23,14 +25,13 @@ import java.security.PrivateKey;
  * Implementation of PID-Resolver based on Handle System
  */
 public class HandleHandler implements PidResolverHandler {
-    /** The admin ID */
-    private static final String ADMIN_ID = "0.NA/109.3.1";
-    /** Password/passphrase for getting handle private key */
-    private static final String HANDLE_PASSWORD = "";
+    /** The prefix for admin ID */
+    private static final String ADMIN_ID_PREFIX = "0.NA/";
     /** Path to admpriv.bin file */
-    private static final String PRIVATE_KEY_PATH = System.getProperty("user.home")
+    private static final String DEFAULT_PRIVATE_KEY_PATH = System.getProperty("user.home")
             + System.getProperty("file.separator") + ".config"
             + System.getProperty("file.separator") + "handle";
+    //TODO Consider whether of any of the below needs config
     /** Name of the admpriv.bin file */
     private static final String PRIVATE_KEY_FILENAME = "admpriv.bin";
     /** Charset used by the Handle system. */
@@ -51,18 +52,12 @@ public class HandleHandler implements PidResolverHandler {
     private static final Boolean PUBLIC_READ = true;
     /** Handle public write permission. */
     private static final Boolean PUBLIC_WRITE = false;
-    /** Init a public key authentication information object. */
-    private static final PublicKeyAuthenticationInfo pubKeyAuthInfo;
-    static {
-        // AuthenticationInfo is constructed with the admin handle, index,
-        // and PrivateKey as arguments.
-        PrivateKey privateKey = loadPrivateKey();
-        pubKeyAuthInfo = new PublicKeyAuthenticationInfo(
-                HandleHandler.ADMIN_ID.getBytes(HandleHandler.DEFAULT_ENCODING),
-                HandleHandler.ADMIN_INDEX, privateKey);
-    }
+    /** A public key authentication information object. */
+    private final PublicKeyAuthenticationInfo pubKeyAuthInfo;
     /** Configuration info for registrar. */
-    private final RegistrarConfiguration config; //TODO: Add config
+    private final RegistrarConfiguration config;
+    /** Logger for class. */
+    private final Log log = LogFactory.getLog(getClass());
 
     /**
      * Initialize handle handler.
@@ -71,6 +66,14 @@ public class HandleHandler implements PidResolverHandler {
      */
     public HandleHandler(RegistrarConfiguration config) {
         this.config = config;
+
+        // AuthenticationInfo is constructed with the admin handle, index,
+        // and PrivateKey as arguments.
+        PrivateKey privateKey = loadPrivateKey();
+        pubKeyAuthInfo = new PublicKeyAuthenticationInfo(
+                (ADMIN_ID_PREFIX + config.getHandlePrefix())
+                        .getBytes(HandleHandler.DEFAULT_ENCODING),
+                HandleHandler.ADMIN_INDEX, privateKey);
     }
 
     /**
@@ -81,10 +84,15 @@ public class HandleHandler implements PidResolverHandler {
      * @throws PrivateKeyException If something went wrong loading the private
      *                             key.
      */
-    private static PrivateKey loadPrivateKey() throws PrivateKeyException {
+    private PrivateKey loadPrivateKey() throws PrivateKeyException {
         File privateKeyFile;
-        privateKeyFile = new File(PRIVATE_KEY_PATH, PRIVATE_KEY_FILENAME);
         PrivateKey key;
+
+        String privateKeyPath = config.getPrivateKeyPath();
+        if (privateKeyPath == null) {
+            privateKeyPath = DEFAULT_PRIVATE_KEY_PATH;
+        }
+        privateKeyFile = new File(privateKeyPath, PRIVATE_KEY_FILENAME);
 
         if (!privateKeyFile.exists()) {
             throw new PrivateKeyException(
@@ -100,13 +108,15 @@ public class HandleHandler implements PidResolverHandler {
 
         try {
             key = Util.getPrivateKeyFromFileWithPassphrase(privateKeyFile,
-                                                           HANDLE_PASSWORD);
+                                                           config.getPrivateKeyPassword());
         } catch (Exception e) {
             String message = "The admin private key  in '"
                             + privateKeyFile + "' could not be used, "
                     + " was the correct password used? " + e.getMessage();
             throw new PrivateKeyException(message, e);
         }
+        log.debug("Read handle private key from '" + privateKeyFile.getPath()
+                          + "'");
         return key;
     }
 
@@ -114,6 +124,8 @@ public class HandleHandler implements PidResolverHandler {
     public void registerPid(String repositoryId, String pid, String urlPattern)
             throws RegisteringPidFailedException {
         String urlToRegister = String.format(urlPattern, repositoryId);
+        log.debug("Registering handle '" + pid + "' for '" + repositoryId
+                          + "', url '" + urlToRegister +  "'");
         HandleValue values[] = new HandleValue[]{};
         boolean handleExists;
 
@@ -141,8 +153,16 @@ public class HandleHandler implements PidResolverHandler {
 
                     if (urlAtServer.equalsIgnoreCase(urlToRegister)) {
                         // It was the same url, so just return
+                        log.debug("Handle '" + pid
+                                          + "' already registered as url '"
+                                          + urlToRegister + "'. Doing nothing.");
                         return;
                     } else {
+                        log.debug("Handle '" + pid
+                                          + "' already registered at different"
+                                          + " url '"
+                                          + urlAtServer + "'. Replacing with '"
+                                          + urlToRegister + "'");
                         int indexAtServer = value.getIndex();
                         // It was a different url, replace it
                         replaceUrlOfPidAtServer(pid, indexAtServer,
@@ -153,8 +173,14 @@ public class HandleHandler implements PidResolverHandler {
             }
             // There was no url, so add it to the existing handle
             addUrlToPidAtServer(pid, urlToRegister);
+            log.debug("Handle '" + pid
+                              + "' already registered, but with no url.Adding '"
+                              + urlToRegister + "'");
 
         } else {
+            log.debug("Handle '" + pid
+                              + "' was previously unknown. Adding with url '"
+                              + urlToRegister + "'");
             // If not there, add handle and url in handle server
             addPidToServer(pid, urlToRegister);
         }
@@ -254,7 +280,8 @@ public class HandleHandler implements PidResolverHandler {
             throws RegisteringPidFailedException {
 
         // Define the admin record for the handle we want to create
-        AdminRecord admin = new AdminRecord(ADMIN_ID.getBytes(DEFAULT_ENCODING),
+        AdminRecord admin = new AdminRecord((ADMIN_ID_PREFIX + config.getHandlePrefix())
+                                                    .getBytes(DEFAULT_ENCODING),
                                             ADMIN_INDEX,
                                             AdminRecord.PRM_ADD_HANDLE,
                                             AdminRecord.PRM_DELETE_HANDLE,

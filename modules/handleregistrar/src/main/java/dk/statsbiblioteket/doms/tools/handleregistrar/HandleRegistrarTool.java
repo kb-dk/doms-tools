@@ -21,33 +21,38 @@ public class HandleRegistrarTool {
     private static Log log = LogFactory.getLog(HandleRegistrarTool.class);
 
     public static void main(String[] args) {
-        CommandLine line = parseOptions(args);
-        if (line == null) {
-            System.exit(1);
-        }
+        try {
+            CommandLine line = parseOptions(args);
+            if (line == null) {
+                System.exit(1);
+            }
 
-        String query = line.getOptionValue("q");
-        String urlPattern = line.getOptionValue("u");
-        String configFile;
-        if (line.hasOption("c")) {
-            configFile = line.getOptionValue("c");
-        } else {
-            configFile = System.getProperty("user.home")
-                    + "/.config/handle/handleregistrar.properties"
-                    .replaceAll("/", System.getProperty("file.separator"));
-        }
+            String query = line.getOptionValue("q");
+            String urlPattern = line.getOptionValue("u");
+            String configFile;
+            if (line.hasOption("c")) {
+                configFile = line.getOptionValue("c");
+            } else {
+                configFile = System.getProperty("user.home")
+                        + "/.config/handle/handleregistrar.properties"
+                        .replaceAll("/", System.getProperty("file.separator"));
+            }
 
-        log.info("Config file: " + configFile);
-        log.info("Query: " + query);
-        log.info("URL pattern: " + urlPattern);
-        RegistrarConfiguration config = new PropertyBasedRegistrarConfiguration(
-                new File(configFile));
-        HandleRegistrar registrar = new BasicHandleRegistrar(config,
-                                                             new DomsHandler(
-                                                                     config),
-                                                             new HandleHandler(
-                                                                     config));
-        registrar.addHandles(query, urlPattern);
+            log.info("Config file: " + configFile);
+            log.info("Query: " + query);
+            log.info("URL pattern: " + urlPattern);
+            RegistrarConfiguration config = new PropertyBasedRegistrarConfiguration(
+                    new File(configFile));
+            HandleRegistrar registrar = new BasicHandleRegistrar(new DomsHandler(
+                                                                         config),
+                                                                 new HandleHandler(
+                                                                         config));
+            System.out.println(registrar.addHandles(query, urlPattern));
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage());
+            log.error("Failure adding handles", e);
+            System.exit(2);
+        }
     }
 
     /**

@@ -33,7 +33,7 @@ public class HandleHandlerTest extends TestCase {
     private static final String URL_PATTERN
             = "http://devel05.statsbiblioteket.dk:9381/kultur/#/?recordId=doms_radioTVCollection:%s";
 
-    private static final String ADMIN_ID = "0.NA/109.3.1";   // TODO rite?
+    private static final String ADMIN_ID = "0.NA/109.3.1";
     private static final Charset DEFAULT_ENCODING = Charset.forName("UTF8");
     private static final int ADMIN_INDEX = 300;
     private static final int ADMIN_RECORD_INDEX = 200;
@@ -48,7 +48,7 @@ public class HandleHandlerTest extends TestCase {
 
     private PropertyBasedRegistrarConfiguration config
             = new PropertyBasedRegistrarConfiguration(
-            new File("src/test/resources/handleregistrar.properties"));
+            new File("src/test/config/handleregistrar.properties"));
 
     public void setUp() throws Exception {
         authInfo = new PublicKeyAuthenticationInfo(
