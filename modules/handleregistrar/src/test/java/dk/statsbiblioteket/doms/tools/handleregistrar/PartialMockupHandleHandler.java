@@ -33,8 +33,7 @@ public class PartialMockupHandleHandler extends HandleHandler {
     }
 
     @Override
-    public void replaceUrlOfPidAtServer(String pid, int indexOfPidValue,
-                                        String url)
+    public void replaceUrlOfPidAtServer(String pid, String url)
             throws RegisteringPidFailedException {
         replaceUrlOfPidAtServerCount++;
         replaceUrlOfPidAtServerPid = pid;

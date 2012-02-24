@@ -30,15 +30,14 @@ public interface PidResolverHandler {
     /**
      * Replace the URL of given pid at the server.
      *
+     *
      * @param pid             PID, the url of which has to be replaced
-     * @param indexOfPidValue The index of the value containing the url, for
-     *                        the given pid.
      * @param url             The new url, to be used in the pid instead of the
      *                        existing
      * @throws RegisteringPidFailedException In case we couldn't replace URL
      *                                       of pid at the server.
      */
-    void replaceUrlOfPidAtServer(String pid, int indexOfPidValue, String url)
+    void replaceUrlOfPidAtServer(String pid, String url)
             throws RegisteringPidFailedException;
 
     /**

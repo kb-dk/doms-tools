@@ -148,7 +148,9 @@ public class HandleHandler implements PidResolverHandler {
             // Handle was there, now find its url
             for (HandleValue value : values) {
                 String type = value.getTypeAsString();
-                if (type.equalsIgnoreCase("URL")) {
+                int index = value.getIndex();
+                if (type.equalsIgnoreCase("URL")
+                        && index == URL_RECORD_INDEX) {
                     String urlAtServer = value.getDataAsString();
 
                     if (urlAtServer.equalsIgnoreCase(urlToRegister)) {
@@ -163,11 +165,9 @@ public class HandleHandler implements PidResolverHandler {
                                           + " url '"
                                           + urlAtServer + "'. Replacing with '"
                                           + urlToRegister + "'");
-                        int indexAtServer = value.getIndex();
                         // It was a different url, replace it
-                        replaceUrlOfPidAtServer(pid, indexAtServer,
-                                                urlToRegister);
-                        return; //TODO: Discuss logic of replacing URLs
+                        replaceUrlOfPidAtServer(pid, urlToRegister);
+                        return;
                     }
                 }
             }
@@ -231,15 +231,14 @@ public class HandleHandler implements PidResolverHandler {
     }
 
     @Override
-    public void replaceUrlOfPidAtServer(String pid, int indexOfPidValue,
-                                        String url)
+    public void replaceUrlOfPidAtServer(String pid, String url)
             throws RegisteringPidFailedException {
 
         // Create the new value to be registered at the server. This will
         // replace the value on the server that has the same index.
         int timestamp = (int) (System.currentTimeMillis() / 1000);
         HandleValue replacementValue
-                = new HandleValue(indexOfPidValue,
+                = new HandleValue(URL_RECORD_INDEX,
                                   // unique index
                                   "URL".getBytes(DEFAULT_ENCODING),
                                   // handle value type

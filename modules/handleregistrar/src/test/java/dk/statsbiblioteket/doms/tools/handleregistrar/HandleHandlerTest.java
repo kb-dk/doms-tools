@@ -198,7 +198,7 @@ public class HandleHandlerTest extends TestCase {
     public void testReplaceUrlOfPidAtServer() throws Exception {
         HandleHandler handler = new HandleHandler(config);
         String url = String.format(URL_PATTERN, PID1);
-        handler.replaceUrlOfPidAtServer("109.3.1/" + PID2, URL_RECORD_INDEX, url);
+        handler.replaceUrlOfPidAtServer("109.3.1/" + PID2, url);
         HandleValue[] handleValues = new HandleResolver()
                 .resolveHandle("109.3.1/" + PID2, null, null);
         assertNotNull(handleValues);
