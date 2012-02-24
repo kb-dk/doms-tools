@@ -8,16 +8,16 @@
 
     <groupId>dk.statsbiblioteket.doms.tools</groupId>
     <artifactId>tools</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>Doms Tools package</name>
 
     <packaging>pom</packaging>
 
     <scm>
-        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/examples/tools/trunk</connection>
-        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/examples/tools/trunk
+        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/examples/tools/tags/tools-0.1.0</connection>
+        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/examples/tools/tags/tools-0.1.0
         </developerConnection>
-        <url>http://doms.svn.sourceforge.net/viewvc/doms/examples/tools/trunk</url>
+        <url>http://doms.svn.sourceforge.net/viewvc/doms/examples/tools/tags/tools-0.1.0</url>
     </scm>
 
 
