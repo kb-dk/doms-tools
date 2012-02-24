@@ -14,10 +14,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClientImpl:0.0.14-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClient:0.0.14-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-impl:0.0.14-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-interface:0.0.14-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClientImpl:0.0.14" level="project" />
+    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.ingestClient:ingestClient:0.0.14" level="project" />
+    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-impl:0.0.14" level="project" />
+    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.client:domsClient-common-interface:0.0.14" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tuscany.sdo:tuscany-sdo-tools:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tuscany.sdo:tuscany-sdo-lib:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tuscany.sdo:tuscany-sdo-api-r2.1:1.1.1" level="project" />
@@ -35,7 +35,7 @@
     <orderEntry type="library" name="Maven: dk.statsbiblioteket.sbutil:sbutil:0.5.2" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.central:centralWebservice-interface:0.0.26" level="project" />
-    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.client:domsClient:0.0.14-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.client:domsClient:0.0.14" level="project" />
   </component>
 </module>
 
