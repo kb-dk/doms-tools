@@ -46,8 +46,7 @@ public class DomsHandler implements RepositoryHandler {
     }
 
     @Override
-    public List<String> findObjectFromQuery(String query)
-            throws BackendInvalidCredsException, BackendMethodFailedException {
+    public List<String> findObjectFromQuery(String query) {
         try {
             String objects = REST_CLIENT.resource(config.getFedoraLocation())
                     .path("/risearch").queryParam("type", "tuples")
@@ -64,6 +63,9 @@ public class DomsHandler implements RepositoryHandler {
                 }
                 if (line.startsWith("info:fedora/")) {
                     line = line.substring("info:fedora/".length());
+                }
+                if (line.indexOf(',') >= 0) {
+                    line = line.substring(0, line.indexOf(','));
                 }
                 foundObjects.add(line);
             }

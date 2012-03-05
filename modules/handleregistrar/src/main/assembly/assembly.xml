@@ -20,6 +20,17 @@
             <directory>src/main/scripts</directory>
             <fileMode>0755</fileMode>
         </fileSet>
+        <fileSet>
+            <outputDirectory>docs</outputDirectory>
+            <directory>docs</directory>
+        </fileSet>
+        <fileSet>
+            <includes>
+                <include>NOTICE.txt</include>
+                <include>LICENSE.txt</include>
+                <include>README.txt</include>
+            </includes>
+        </fileSet>
     </fileSets>
 
 

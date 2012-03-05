@@ -5,8 +5,8 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
 
-/** Use Fedora risearch for performing Queries, domsClient for adding identifier
- * and a HandleAdministrator instance for registering handles. */
+/** Use DomsHandler for performing Queries and adding identifiers
+ * and a HandleHandler instance for registering handles. */
 public class BasicHandleRegistrar implements HandleRegistrar {
     private final RepositoryHandler repositoryHandler;
     private final PidResolverHandler pidResolverHandler;
@@ -20,6 +20,7 @@ public class BasicHandleRegistrar implements HandleRegistrar {
         this.pidResolverHandler = pidResolverHandler;
     }
 
+    @Override
     public String addHandles(String query, String urlPattern) {
         List<String> pids = repositoryHandler.findObjectFromQuery(query);
         for (String pid : pids) {

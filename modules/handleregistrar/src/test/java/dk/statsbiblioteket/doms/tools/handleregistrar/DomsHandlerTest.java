@@ -75,6 +75,11 @@ public class DomsHandlerTest extends TestCase {
                        "where\n" +
                        "$object <info:fedora/fedora-system:def/model#label> 'P2 Koncerten'\n");
         assertTrue("List of found finds does not contain '" + PID1 + "', but: " + pids, pids.contains(PID1));
+        pids = domsHandler.findObjectFromQuery("select $object 'test'\n" +
+                       "from <#ri> \n" +
+                       "where\n" +
+                       "$object <info:fedora/fedora-system:def/model#label> 'P2 Koncerten'\n");
+        assertTrue("List of found finds does not contain '" + PID1 + "', but: " + pids, pids.contains(PID1));
     }
 
     public void testAddHandleToObject() throws Exception {

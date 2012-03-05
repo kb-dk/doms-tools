@@ -69,7 +69,7 @@ public class HandleRegistrarTool {
         Option configFileOption = new Option("c", "config-file", true,
                                              "Configuration file. Default is $HOME/.config/handle/handleregistrar.properties");
         Option queryOption = new Option("q", "query", true,
-                                        "iTQL query for getting PIDs from DOMS. Must return a list of PIDs.");
+                                        "iTQL query for getting PIDs from DOMS. Must return a list with PIDs as first element.");
         queryOption.setRequired(true);
         Option urlPatternOption = new Option("u", "url-pattern", true,
                                              "URL pattern for what the objects should resolve as. %s is replaced with PID.");
