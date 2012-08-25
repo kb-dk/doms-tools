@@ -21,8 +21,8 @@
 
 
     <modules>
-        <module>modules/domscleaner</module>
-        <module>modules/handleregistrar</module>
+        <module>domscleaner</module>
+        <module>handleregistrar</module>
     </modules>
 
     <dependencyManagement>
