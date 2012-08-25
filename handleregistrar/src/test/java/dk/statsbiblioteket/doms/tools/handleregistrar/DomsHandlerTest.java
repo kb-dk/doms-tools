@@ -21,13 +21,13 @@ import java.util.List;
  * config is available and contains the expected data.
  *
  * Expected data is:
- * Object with UUID uuid:00022366-955b-4cb5-9646-e04c9262bd6f exists and has handle 109.3.1/uuid:00022366-955b-4cb5-9646-e04c9262bd6f
- * Object with UUID uuid:0041e7a1-79e3-4314-8af0-f59d71fd90f2 exists and has no handles
+ * Object with UUID uuid:001fdf2b-a05a-40de-a43b-787f1ba9041f exists and has handle 109.3.1/uuid:001fdf2b-a05a-40de-a43b-787f1ba9041f and label 'Jeg er et dyr!'
+ * Object with UUID uuid:0019f31d-b6f7-4ef2-81f6-89b116c64272 exists and has no handles
  */
 public class DomsHandlerTest extends TestCase {
 
-    private static final String PID1 = "uuid:00022366-955b-4cb5-9646-e04c9262bd6f";
-    private static final String PID2 = "uuid:0041e7a1-79e3-4314-8af0-f59d71fd90f2";
+    private static final String PID1 = "uuid:001fdf2b-a05a-40de-a43b-787f1ba9041f";
+    private static final String PID2 = "uuid:0019f31d-b6f7-4ef2-81f6-89b116c64272";
     private PropertyBasedRegistrarConfiguration config;
     private Document d1;
     private Document d2;
@@ -73,12 +73,12 @@ public class DomsHandlerTest extends TestCase {
         List<String> pids = domsHandler.findObjectFromQuery("select $object\n" +
                        "from <#ri> \n" +
                        "where\n" +
-                       "$object <info:fedora/fedora-system:def/model#label> 'P2 Koncerten'\n");
+                       "$object <info:fedora/fedora-system:def/model#label> 'Jeg er et dyr!'\n");
         assertTrue("List of found finds does not contain '" + PID1 + "', but: " + pids, pids.contains(PID1));
         pids = domsHandler.findObjectFromQuery("select $object 'test'\n" +
                        "from <#ri> \n" +
                        "where\n" +
-                       "$object <info:fedora/fedora-system:def/model#label> 'P2 Koncerten'\n");
+                       "$object <info:fedora/fedora-system:def/model#label> 'Jeg er et dyr!'\n");
         assertTrue("List of found finds does not contain '" + PID1 + "', but: " + pids, pids.contains(PID1));
     }
 
