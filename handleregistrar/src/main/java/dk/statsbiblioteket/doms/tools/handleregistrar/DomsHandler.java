@@ -50,7 +50,7 @@ public class DomsHandler implements RepositoryHandler {
         try {
             String objects = REST_CLIENT.resource(config.getFedoraLocation())
                     .path("/risearch").queryParam("type", "tuples")
-                    .queryParam("lang", "iTQL").queryParam("format", "CSV")
+                    .queryParam("lang", "sparql").queryParam("format", "CSV")
                     .queryParam("flush", "true").queryParam("stream", "on")
                     .queryParam("query", query)
                     .header("Authorization", getBase64Creds())

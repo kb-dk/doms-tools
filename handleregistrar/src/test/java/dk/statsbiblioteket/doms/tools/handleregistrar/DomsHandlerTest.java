@@ -70,15 +70,18 @@ public class DomsHandlerTest extends TestCase {
 
     public void testFindObjectFromQuery() throws Exception {
         DomsHandler domsHandler = new DomsHandler(config);
-        List<String> pids = domsHandler.findObjectFromQuery("select $object\n" +
-                       "from <#ri> \n" +
-                       "where\n" +
-                       "$object <info:fedora/fedora-system:def/model#label> 'Jeg er et dyr!'\n");
+        List<String> pids = domsHandler.findObjectFromQuery(
+                "select ?object\n"
+                        + "where {\n"
+                        + "?object <info:fedora/fedora-system:def/model#label> 'Jeg er et dyr!' .\n"
+                        + "}");
         assertTrue("List of found finds does not contain '" + PID1 + "', but: " + pids, pids.contains(PID1));
-        pids = domsHandler.findObjectFromQuery("select $object 'test'\n" +
-                       "from <#ri> \n" +
-                       "where\n" +
-                       "$object <info:fedora/fedora-system:def/model#label> 'Jeg er et dyr!'\n");
+        pids = domsHandler.findObjectFromQuery(
+                "select ?object ?date\n"
+                        + "where {\n"
+                        + "?object <info:fedora/fedora-system:def/model#label> 'Jeg er et dyr!' .\n"
+                        + "?object <info:fedora/fedora-system:def/view#lastModifiedDate> ?date .\n"
+                        + "}");
         assertTrue("List of found finds does not contain '" + PID1 + "', but: " + pids, pids.contains(PID1));
     }
 
