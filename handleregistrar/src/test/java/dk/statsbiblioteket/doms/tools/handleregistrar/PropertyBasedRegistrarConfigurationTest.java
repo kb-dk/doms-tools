@@ -15,7 +15,7 @@ public class PropertyBasedRegistrarConfigurationTest extends TestCase {
             new File("src/test/config/handleregistrar.properties"));
 
     public void testGetFedoraLocation() {
-        assertEquals("http://alhena:7880/fedora", config.getFedoraLocation());
+        assertEquals("http://alhena:7980/fedora", config.getFedoraLocation());
     }
 
     public void testGetUsername() {
@@ -28,7 +28,7 @@ public class PropertyBasedRegistrarConfigurationTest extends TestCase {
 
     public void testGetDomsWSAPIEndpoint() throws MalformedURLException {
         assertEquals(
-                new URL("http://alhena:7880/centralWebservice-service/central/?wsdl"),
+                new URL("http://alhena:7980/centralWebservice-service/central/?wsdl"),
                 config.getDomsWSAPIEndpoint());
     }
 
